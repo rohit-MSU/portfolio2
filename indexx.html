@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .registration {
+            background-color: #afd2ff;
+            padding: 6px 30px;
+            border: 1px solid black;
+            border-radius: 31px;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            background: linear-gradient(to bottom, rgb(6, 108, 100), rgb(14, 48, 122));
+            width: 600px;
+            height: 350px;
+            border-radius: 5px;
+            position: relative;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .content-holder {
+            text-align: center;
+            color: white;
+            font-size: 14px;
+            font-weight: lighter;
+            letter-spacing: 2px;
+        }
+
+        .content-holder h2 {
+            font-size: 28px;
+            margin: 20px auto;
+        }
+
+        .content-holder p {
+            margin: 20px auto;
+        }
+
+        .content-holder button {
+            border: none;
+            font-size: 14px;
+            padding: 10px;
+            border-radius: 6px;
+            background-color: white;
+            width: 130px;
+            margin: 15px auto;
+            cursor: pointer;
+        }
+
+        .box-2 {
+            border-radius: 8px;
+            background-color: white;
+            margin: 5px;
+            position: relative;
+        }
+
+        .login-form-container,
+        .signup-form-container {
+            text-align: center;
+            margin-top: 10%;
+            display: none;
+        }
+
+        .login-form-container h1,
+        .signup-form-container h1 {
+            color: black;
+            font-size: 20px;
+            padding: 10px;
+        }
+
+        .input-field {
+            font-size: 14px;
+            padding: 10px;
+            border-radius: 7px;
+            border: 1px solid rgb(168, 168, 168);
+            width: 200px;
+            margin: 5px 0;
+            outline: none;
+        }
+
+        .login-button,
+        .signup-button {
+            color: white;
+            font-size: 14px;
+            padding: 10px;
+            border-radius: 7px;
+            border: none;
+            width: 220px;
+            margin: 10px 0;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .login-button {
+            background-color: rgb(56, 102, 189);
+        }
+
+        .signup-button {
+            background-color: rgb(56, 189, 149);
+        }
+
+        #overlay {
+            position: fixed;
+            display: none;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+            cursor: pointer;
+        }
+
+        .popup {
+            padding: 20px;
+            height: 65%;
+            display: none;
+            z-index: 3;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .navbar2 .menu li a.selected {
+            color: #f47521; 
+            font-weight: bold; 
+            padding: 10px; 
+            text-decoration: underline; 
+            text-decoration-color: #f47521; 
+            text-underline-offset: 3px; 
+        }
+
+        .navbar2 {
+            background-color: #fff; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 61px; 
+            list-style: none; 
+        }
+
+        .navbar2 .logo {
+            display: flex; 
+            align-items: center; 
+            color: #000; 
+        }
+
+        .navbar2 .logo img {
+            height: 50px; 
+            margin-right: 10px; 
+        }
+
+        .navbar2 .logo div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; 
+        }
+
+        .navbar2 .company-info h1 {
+            font-size: 0.9375rem; 
+            margin: 0;
+            color: #005d60;
+            font-family: "Dosis", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 0.5px;
+            opacity: 0; 
+            animation: fadeInUp 1s forwards; 
+        }
+
+        .navbar2 .company-info h2 {
+            font-size: 0.625rem; 
+            margin: 0;
+            color: #5a5a5a;
+            font-family: "Dosis", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 0.5px;
+            opacity: 0; 
+            animation: fadeInUp 1s forwards; 
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px); 
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0); 
+            }
+        }
+
+        .navbar2 .menu {
+            display: flex;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .navbar2 .menu li {
+            margin-right: 20px;
+            position: relative;
+            color: #000; 
+            text-transform: capitalize;
+        }
+
+        .navbar2 .menu li a {
+            padding: 12px 14px;
+            text-decoration: none;
+            color: #000; 
+            transition: color 0.3s ease; 
+        }
+
+        .navbar2 .menu li a:hover {
+            color: #f47521; 
+        }
+
+        .menu-icon {
+            display: none; 
+        }
+
+        /*ABOUT DROPDOWN*/
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .dropdown-content li {
+            display: block;
+        }
+        
+        .dropdown-content li a {
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content li a:hover {
+            background-color: #ddd;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .selected {
+            font-weight: bold;
+        }
+        Explanation
+
+        header {
+            position: fixed;   
+            top: 0;            
+            width: 100%;       
+            z-index: 1000;  
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            margin-top: 80px;
+            overflow: hidden;
+            width: 100%;
+            height: 600px; /* Increase height */
+            position: relative;
+        }
+
+        .carousel {
+            display: flex;
+            transition: transform 1s ease;
+        }
+
+        .carousel-item {
+            display: flex;
+            flex: 1 0 100%;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #afd2ff;
+            border-radius: 10px;
+            box-sizing: border-box;
+        }
+
+        .carousel-item .left {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .carousel-item .left h2 {
+            font-size: 28px; /* Increase font size */
+            margin-bottom: 10px;
+        }
+
+        .carousel-item .left p {
+            font-size: 18px; /* Increase font size */
+            margin-bottom: 20px;
+        }
+
+        .carousel-item .left button {
+            font-size: 14px; /* Increase font size */
+            padding: 7px 15px; /* Increase padding */
+            background-color: #f47521;
+            color: #000;
+            border: 1px solid black;
+            border-radius: 25px;
+            cursor: pointer;
+        }
+        
+
+        .carousel-item .right {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .carousel-item .right img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Footer Styles */
+        /* CSS Styles for footer */
+footer {
+    background-color: #111;
+    color: #fff;
+    padding: 20px 0;
+  }
+  
+  .container {
+    width: 80%;
+    margin: 0 auto;
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .social-icons img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .social-icons img:hover {
+    transform: scale(1.2);
+  }
+  
+  .quick-links ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .quick-links ul li {
+    margin-bottom: 5px;
+  }
+  
+  .quick-links ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .quick-links ul li a:hover {
+    color: #ff9800;
+  }
+  
+  .map {
+    flex: 1;
+    margin-left: 20px;
+    position: relative;
+  }
+  
+  .map iframe {
+    width: 100%;
+    height: 500px;
+    border: 5px solid #fff;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .map:hover iframe {
+    transform: scale(1.05);
+  }
+  
+  .copyright {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+       
+
+  
+  /* Footer Styles */
+  .site-footer {
+    background-color: #333;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 20px; /* Increased padding for better spacing around */
+}
+
+.footer-content {
+    display: flex;
+    justify-content:space-between;
+    align-items:stretch;
+    max-width: 1200px; /* Ensures the content does not stretch too wide */
+    margin: 0 auto; /* Centers the content within the footer */
+    padding: 0 30px; /* Adds padding on the sides */
+}
+
+.footer-info {
+  display: flex;
+  flex-direction: column;
+  padding-right: 53px;
+}
+
+.footer-contact, .footer-links, .footer-social {
+  margin-bottom: 10px;
+}
+
+.footer-contact h3, .footer-links h3, .footer-social h3 {
+  color: #f47521;
+  font-size: 1.2rem;
+  margin-bottom: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease-in-out;
+}
+
+.footer-contact p, .footer-links ul, .footer-social a {
+  color: #fff;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+.footer-link ul li{
+  margin-top: 10px;
+
+}
+
+.footer-links li a {
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.footer-links li a:hover {
+  color: #f47521;
+  transform: translateX(10px);
+}
+
+
+.footer-social a {
+  color: #fff;
+  display: inline-block;
+  margin: 0 10px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.footer-social a img {
+  width: 40px; 
+  filter: contrast(80%) brightness(90%);
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55), filter 0.5s ease;
+  transform-origin: center;
+}
+
+.footer-social a:hover img {
+  transform: scale(1.2) rotateZ(10deg); 
+  filter: contrast(120%) brightness(110%);
+}
+
+/* Specific hover styles for each social media platform with color accent */
+.social-link.facebook:hover img {
+  filter: contrast(120%) brightness(120%) hue-rotate(-10deg);
+}
+
+.social-link.twitter:hover img {
+  filter: contrast(120%) brightness(120%) hue-rotate(10deg);
+}
+
+.social-link.instagram:hover img {
+  filter: contrast(120%) brightness(120%) hue-rotate(-10deg);
+}
+
+/* Bouncing animation for icons */
+@keyframes bounce {
+  0%, 100% {
+      transform: translateY(0);
+  }
+  50% {
+      transform: translateY(-10px) rotateZ(10deg); 
+  }
+}
+
+.social-link:hover img {
+  animation: bounce 1s infinite;
+}
+
+
+
+footer .footer-map {
+  color: #f47521;
+  margin-top: 10px;
+  width: 54%; /* Reduce width to make the map smaller */
+  height: 250px; /* Specify a height to control the size */
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.footer-map iframe {
+  width: 100%;
+  height: 100%; /* Ensure the iframe fills the container */
+  border: none;
+}
+
+@media (max-width: 768px) {
+  .footer-map {
+    width: 100%; /* Full width on mobile devices */
+    margin-left: 0; /* Align properly on smaller screens */
+    margin-top: 0;
+    height: 300px; /* Adjust height for mobile view */
+  }
+}
+
+.footer-bottom {
+  text-align: center;  /* Ensures the text is centered */
+  width: 100%;  /* Ensures the footer bottom covers the full width of the footer */
+  padding: 15px 0;  /* Adds padding above and below the text for spacing */
+  background-color: #333;  /* Dark background for a subtle, professional look */
+  color: #ccc;  /* Lighter text color for contrast */
+  font-family: 'Arial', sans-serif;  /* Maintains consistent font style */
+  font-size: 0.9rem;  /* Appropriate font size for footer text */
+  border-top: 1px solid #444;  /* Adds a subtle border for a slight separation from content above */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);  /* Adds depth with a shadow at the top */
+  transition: background-color 0.3s ease;  /* Smooth transition for any background color change */
+}
+
+.footer-bottom:hover {
+  background-color: #2a2a2a;  /* Slightly lighter background on hover for interactive effect */
+  color: #fff;  /* White color on hover for better readability */
+}
+
+@media (max-width: 768px) {
+  .footer-bottom {
+      font-size: 0.8rem;  /* Slightly smaller font size on mobile for better fit */
+  }
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar2">
+            <div class="logo">
+                <img src="images/logo.png" alt="Company Logo">
+            </div>
+            <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+            <ul class="menu" id="menu">
+                <li class="dropdown">
+                    <a href="about.php" class="<?= (basename($_SERVER['PHP_SELF']) == 'about.php') ? 'selected' : '';?>">About</a>
+                    <ul class="dropdown-content">
+                        <li><a href="team.php" class="<?= (basename($_SERVER['PHP_SELF']) == 'team.php') ? 'selected' : '';?>">Team</a></li>
+                        <li><a href="history.php" class="<?= (basename($_SERVER['PHP_SELF']) == 'history.php') ? 'selected' : '';?>">History</a></li>
+                    </ul>
+                </li>
+                <li><a href="packages.php" class="<?= (basename($_SERVER['PHP_SELF']) == 'packages.php') ? 'selected' : '';?>">Project</a></li>
+                <li><a href="index.php" class="<?= (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'selected' : '';?>"><i class="fa-solid fa-house fa-beat-fade fa-xl"></i></a></li>
+                <li><a href="services.php" class="<?= (basename($_SERVER['PHP_SELF']) == 'services.php') ? 'selected' : '';?>">Blog</a></li>
+                <li><a href="contact.php" class="<?= (basename($_SERVER['PHP_SELF']) == 'contact.php') ? 'selected' : '';?>">Contact</a></li>
+            </ul>
+            
+            <button class="registration" onclick="openRegistrationPopup()">Signup</button>
+        </nav>
+    </header>
+    <div id="overlay" onclick="closePopup('registration-popup')"></div>
+    <div class="container popup" id="registration-popup">
+        <!-- Data or Content -->
+        <div class="box-1">
+            <div class="content-holder">
+                <h2>Hello!</h2>
+                <button class="button-1" onclick="signup()">Sign up</button>
+                <button class="button-2" onclick="login()">Login</button>
+            </div>
+        </div>
+        <!-- Forms -->
+        <div class="box-2">
+            <div class="login-form-container">
+                <h1>Login Form</h1>
+                <input type="text" placeholder="Username" class="input-field">
+                <br>
+                <input type="password" placeholder="Password" class="input-field">
+                <br>
+                <button class="login-button" type="button">Login</button>
+            </div>
+            <!-- Create Container for Signup form -->
+            <div class="signup-form-container">
+                <h1>Sign Up Form</h1>
+                <input type="text" placeholder="Username" class="input-field">
+                <br>
+                <input type="email" placeholder="Email" class="input-field">
+                <br>
+                <input type="password" placeholder="Password" class="input-field">
+                <br>
+                <button class="signup-button" type="button">Sign Up</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="carousel-container">
+        <div class="carousel">
+            <div class="carousel-item">
+                <div class="left">
+                    <h2>Skills</h2>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula venenatis dolor.</p>
+                    <button>Hire Me</button>
+                </div>
+                <div class="right">
+                    <img src="a1.jpeg" alt="Skill Image 1">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="left">
+                    <h2>Experience</h2>
+                    <p>Maecenas tincidunt, arcu vel laoreet sagittis, quam nisi commodo risus, non laoreet justo mauris id velit. Fusce egestas, sapien eget viverra malesuada, dui augue fermentum elit, et scelerisque turpis augue sit amet arcu.</p>
+                    <button>Learn More</button>
+                </div>
+                <div class="right">
+                    <img src="th.jpeg" alt="Experience Image 1">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="left">
+                    <h2>Projects</h2>
+                    <p>Curabitur vel sem mi. Proin in lobortis ipsum. Aliquam rutrum tempor ex ac rutrum. In hac habitasse platea dictumst. Donec sit amet gravida nisi, vel aliquet erat.</p>
+                    <button>View Projects</button>
+                </div>
+                <div class="right">
+                    <img src="a.jpeg" alt="Project Image 1">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="footer-contact">
+                    <h3>Contact Me</h3>
+                    <p>Phone: 8250690057</p>
+                    <p>Email: sikkimtalestoursandtravels@gmail.com</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Me</h3>
+                    <a href="#" class="social-link facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="social-link facebook"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" class="social-link twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="social-link twitter"><i class="fa-brands fa-linkedin"></i></i></a>
+                    <a href="#" class="social-link instagram"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-map">
+                <h3>Find Me</h3>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3544.515368447934!2d88.60985667515848!3d27.328351942105837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39e6a5150c74c8df%3A0x4574bdf2093674fa!2sM.%20G.%20Market!5e0!3m2!1sen!2sin!4v1713530351848!5m2!1sen!2sin" width="100" height="100" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Adventure Inc. All rights reserved.</p>
+        </div>
+    </footer>
+    
+
+    <script>
+        // Function to open the registration popup
+        function openRegistrationPopup() {
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('registration-popup').style.display = 'block';
+        }
+
+        // Function to close the registration popup
+        function closePopup(id) {
+            document.getElementById(id).style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Function to show the signup form
+        function signup() {
+            document.querySelector('.login-form-container').style.display = 'none';
+            document.querySelector('.signup-form-container').style.display = 'block';
+        }
+
+        // Function to show the login form
+        function login() {
+            document.querySelector('.signup-form-container').style.display = 'none';
+            document.querySelector('.login-form-container').style.display = 'block';
+        }
+
+        // Carousel functionality
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.carousel-item');
+
+        function showNextSlide() {
+            items[currentIndex].style.display = 'none';
+            currentIndex = (currentIndex + 1) % items.length;
+            items[currentIndex].style.display = 'flex';
+        }
+
+        // Initialize carousel
+        items.forEach((item, index) => {
+            item.style.display = index === 0 ? 'flex' : 'none';
+        });
+
+        setInterval(showNextSlide, 4000); // Change slide every 4 seconds
+
+        // Function to toggle menu on small screens
+        function toggleMenu() {
+            const menu = document.getElementById('menu');
+            menu.classList.toggle('open');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/phone.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body onclick="checkLock()">
+    <header>
+        <nav class="navbar2">
+            <div class="logo">
+                <img src="images/logo.png" alt="Company Logo">
+            </div>
+            <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+            <ul class="menu" id="menu">
+                <li class="dropdown">
+                    <a href="about.php"
+                        class="<?= (basename($_SERVER['PHP_SELF']) == 'about.php') ? 'selected' : '';?>">About</a>
+                    <ul class="dropdown-content">
+                        <li><a href="team.php"
+                                class="<?= (basename($_SERVER['PHP_SELF']) == 'team.php') ? 'selected' : '';?>">Team</a>
+                        </li>
+                        <li><a href="history.php"
+                                class="<?= (basename($_SERVER['PHP_SELF']) == 'history.php') ? 'selected' : '';?>">History</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="packages.php"
+                        class="<?= (basename($_SERVER['PHP_SELF']) == 'packages.php') ? 'selected' : '';?>">Project</a>
+                </li>
+                <li><a href="index.php"
+                        class="<?= (basename($_SERVER['PHP_SELF']) == 'index.php') ? 'selected' : '';?>"><i
+                            class="fa-solid fa-house fa-beat-fade fa-xl"></i></a></li>
+                <li><a href="services.php"
+                        class="<?= (basename($_SERVER['PHP_SELF']) == 'services.php') ? 'selected' : '';?>">Blog</a>
+                </li>
+                <li><a href="contact.php"
+                        class="<?= (basename($_SERVER['PHP_SELF']) == 'contact.php') ? 'selected' : '';?>">Contact</a>
+                </li>
+            </ul>
+
+            <button class="registration" onclick="openRegistrationPopup()">Signup</button>
+        </nav>
+    </header>
+    <div id="overlay" onclick="closePopup('registration-popup')"></div>
+    <div class="container popup" id="registration-popup">
+        <span class="close-button" onclick="closePopup('registration-popup')"><i class="fa-regular fa-circle-xmark"></i></span>
+        <!-- Data or Content -->
+        <div class="box-1">
+            <div class="content-holder">
+                <h2>Hello!</h2>
+                <button class="button-1" onclick="signup()">Sign up</button>
+                <button class="button-2" onclick="login()">Login</button>
+            </div>
+        </div>
+        <!-- Forms -->
+        <div class="box-2">
+            <div class="login-form-container">
+                <h1>Login Form</h1>
+                <form action="login.php" method="post" id="loginform">
+                    <input type="email" id="email" name="email" placeholder="Email" class="input-field" required>
+                    <br>
+                    <input type="password" id="password" name="password" placeholder="Password" class="input-field" required>
+                    <br>
+                    <div class="recaptcha">
+                        <div class="g-recaptcha" data-sitekey="6Lc93O8pAAAAAPtZNAlZB474op3u2ecgOjQTxv2s"></div>
+                    </div>
+                    <br>
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember Me</label>
+                    </div>
+                    <br>
+                    <button class="login-button" type="submit">Login</button>
+                    <div id="timer" style="color: red;"></div>
+                    <br>
+                </form>
+                
+            </div>
+            <!-- Create Container for Signup form -->
+            <div class="signup-form-container">
+                <h1>Sign Up Form</h1>
+                <form action="register.php" method="post" id="registerform">
+                    <input type="text" name="username" placeholder="Username" class="input-field" required>
+                    <br>
+                    <input type="email" id="email" name="email" placeholder="Email" class="input-field" required>
+                    <br>
+                    <input type="password" id="password" name="password" placeholder="Password" class="input-field" required>
+                    <br>
+                    <input type="password" name="confirm_password" placeholder="Confirm Password" class="input-field" required>
+                    <br>
+                    <button class="signup-button" type="submit">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+     <!-- HERo Section -->
+
+    <div class="carousel">
+        <div class="carousel-inner" id="carousel-inner">
+            <div class="carousel-item">
+                <div class="carousel-content">
+                    <h2>Skills</h2>
+                    <p>Proficient in HTML, CSS, JavaScript, and modern frameworks like React and Angular.</p>
+                    <a href="#contact">Hire Me</a>
+                </div>
+                <img src="images/a1.jpeg" alt="Skills Image 1">
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-content">
+                    <h2>Skills</h2>
+                    <p>Experienced in backend development with Node.js, Express, and database management.</p>
+                    <a href="#contact">Hire Me</a>
+                </div>
+                <img src="images/a.jpeg" alt="Skills Image 2">
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-content">
+                    <h2>Skills</h2>
+                    <p>Skilled in designing responsive and user-friendly interfaces with modern design tools.</p>
+                    <a href="#contact">Hire Me</a>
+                </div>
+                <img src="images/th.jpeg" alt="Skills Image 3">
+            </div>
+        </div>
+        <div class="carousel-buttons">
+            <button class="carousel-button" id="prev">&#10094;</button>
+            <button class="carousel-button" id="next">&#10095;</button>
+        </div>
+    </div>
+    <hr style="color: black; height:2px;">
+
+    <section id="about">
+        <div class="about-left">
+            <span>Welcome</span>
+            <br>
+            <span>to my portfolio website</span>
+            <div class="typed-text"></div>
+            <div class="typed-cursor"></div>
+        </div>
+        <div class="about-right">
+            <img src="images/a.jpeg" alt="Rohit Limboo">
+        </div>
+    </section>
+    
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <p>Here are some of my notable projects:</p>
+        <div class="project-gallery">
+            <div class="project-item">
+                <img src="images/th.jpeg" alt="Project 1">
+                <p>Project 1 - TOURS & TRAVELS</p>
+            </div>
+            <div class="project-item">
+                <img src="images/a.jpeg" alt="Project 2">
+                <p>Project 2 - Description of project 2</p>
+            </div>
+            <div class="project-item">
+                <img src="images/a1.jpeg" alt="Project 3">
+                <p>Project 3 - Description of project 3</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Feel free to get in touch with me:</p>
+        <ul>
+            <li>Email: rohitlimboo@example.com</li>
+            <li>Phone: +918927450552</li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/rohitlimboo">Rohit Limboo</a></li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Rohit Limboo - Portfolio</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize Typed.js
+        var typed = new Typed('.typed-text', {
+            strings: ['I specialize in HTML, CSS, JavaScript, and various web development frameworks.'],
+            typeSpeed: 50,
+            loop: true,
+            loopCount: Infinity
+        });
+
+        // Other scripts...
+                 // Clear login and signup form fields on page load
+                 window.onload = function() {
+                    document.querySelector('#loginform').reset();
+                    document.querySelector('#registerform').reset();
+                };
+        
+        
+        
+                const carouselInner = document.getElementById('carousel-inner');
+                const prevButton = document.getElementById('prev');
+                const nextButton = document.getElementById('next');
+                let index = 0;
+                const totalItems = document.querySelectorAll('.carousel-item').length;
+        
+                prevButton.addEventListener('click', () => {
+                    if (index > 0) {
+                        index--;
+                    } else {
+                        index = totalItems - 1;
+                    }
+                    carouselInner.style.transform = `translateX(-${index * 100}%)`;
+                });
+        
+                nextButton.addEventListener('click', () => {
+                    if (index < totalItems - 1) {
+                        index++;
+                    } else {
+                        index = 0;
+                    }
+                    carouselInner.style.transform = `translateX(-${index * 100}%)`;
+                });
+        
+                const autoSlide = () => {
+                    if (index < totalItems - 1) {
+                        index++;
+                    } else {
+                        index = 0;
+                    }
+                    carouselInner.style.transform = `translateX(-${index * 100}%)`;
+                }
+        
+                setInterval(autoSlide, 4000);
+        
+        
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Prevent pasting into input fields
+                    document.getElementById('email').addEventListener('paste', function (e) {
+                        e.preventDefault();
+                        alert('Pasting into this field is not allowed.');
+                    });
+        
+                    document.getElementById('password').addEventListener('paste', function (e) {
+                        e.preventDefault();
+                        alert('Pasting into this field is not allowed.');
+                    });
+        
+                    // Optional: Disable right-click context menu on input fields
+                    document.getElementById('email').addEventListener('contextmenu', function (e) {
+                        e.preventDefault();
+                    });
+        
+                    document.getElementById('password').addEventListener('contextmenu', function (e) {
+                        e.preventDefault();
+                    });
+                });
+        
+        
+                function startTimer(duration, display) {
+                    var timer = duration, minutes, seconds;
+                    var interval = setInterval(function () {
+                        minutes = parseInt(timer / 60, 10);
+                        seconds = parseInt(timer % 60, 10);
+        
+                        minutes = minutes < 10 ? "0" + minutes : minutes;
+                        seconds = seconds < 10 ? "0" + seconds : seconds;
+        
+                        display.textContent = "Please wait " + minutes + ":" + seconds;
+        
+                        if (--timer < 0) {
+                            clearInterval(interval);
+                            display.textContent = "";
+                            document.getElementById("loginform").elements["email"].disabled = false;
+                            document.getElementById("loginform").elements["password"].disabled = false;
+                            document.getElementById("loginform").elements["loginButton"].disabled = false;
+                        }
+                    }, 1000);
+                }
+        
+                function checkLock() {
+                    var lockTime = "<?php echo isset($_SESSION['lock_time']) ? $_SESSION['lock_time'] : ''; ?>";
+                    if (lockTime) {
+                        var now = new Date().getTime();
+                        var lockEndTime = new Date(lockTime).getTime();
+                        var duration = (lockEndTime - now) / 1000;
+        
+                        if (duration > 0) {
+                            var display = document.querySelector('#timer');
+                            startTimer(duration, display);
+                            document.getElementById("loginform").elements["email"].disabled = true;
+                            document.getElementById("loginform").elements["password"].disabled = true;
+                            document.getElementById("loginform").elements["loginButton"].disabled = true;
+                        }
+                    }
+                }
+        
+    </script>
+    
+</body>
+
+</html>

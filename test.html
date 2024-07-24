@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        /* About section styles */
+        #about {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 50px auto;
+            max-width: 1200px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-left {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        .about-left span {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .about-left .typed-text {
+            font-size: 32px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #ff6f61;
+        }
+
+        .about-right img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+
+        /* Buttons styles */
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-container .btn {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-container .btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <!-- Include Typed.js -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+</head>
+
+<body>
+    <header>
+        <h1>About Page</h1>
+    </header>
+
+    <section id="about">
+        <div class="about-left">
+            <span>Welcome</span>
+            <br>
+            <span>to my portfolio website</span>
+            <div class="typed-text"></div>
+            <div class="typed-cursor"></div>
+        </div>
+        <div class="about-right">
+            <img src="images/hero.png" alt="Rohit Limboo">
+        </div>
+    </section>
+
+    <!-- Buttons -->
+    <div class="btn-container">
+        <button class="btn">Download Resume</button>
+        <button class="btn">Your Choice</button>
+    </div>
+</body>
+
+</html>

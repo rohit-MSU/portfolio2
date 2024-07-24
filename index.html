@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohit Limboo - Portfolio</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 20px 40px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeInDown 1s;
+        }
+
+        header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px;
+            margin: 0 10px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .auth-buttons {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .auth-buttons button {
+            background-color: #ffffff;
+            color: #007bff;
+            border: 1px solid #007bff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 1em;
+            cursor: pointer;
+        }
+
+        .auth-buttons button:hover {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        .carousel {
+            display: flex;
+            overflow: hidden;
+            width: 90%;
+            height: 60vh;
+            margin: 40px auto;
+            border-radius: 0;
+            position: relative;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .carousel-item {
+            min-width: 100%;
+            display: flex;
+            height: 100%;
+        }
+
+        .carousel-item img {
+            width: 50%;
+            object-fit: cover;
+            height: 100%;
+        }
+
+        .carousel-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 50%;
+        }
+
+        .carousel-content h2 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .carousel-content p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .carousel-content a { 
+            width: 11%;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        .carousel-content a:hover {
+            background-color: #0056b3;
+        }
+
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        section {
+            padding: 40px 20px;
+            text-align: center;
+            animation: fadeIn 1s;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #007bff;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        .project-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .project-item {
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .project-item img {
+            width: 100%;
+            height: auto;
+        }
+
+        .project-item:hover {
+            transform: translateY(-10px);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-header,
+        .modal-footer {
+            padding: 10px;
+        }
+
+        .modal-header {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #ddd;
+            text-align: right;
+        }
+
+        .modal-body {
+            padding: 10px 0;
+        }
+
+        .modal h2 {
+            margin-top: 0;
+            color: #007bff;
+        }
+
+        .modal input[type="text"],
+        .modal input[type="password"],
+        .modal input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .modal button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="images/logo1.png" alt="Logo">
+        <div class="auth-buttons">
+            <button id="authButton">Login/Register</button>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#about">About Me</a>
+        <a href="#projects">Projects</a>
+        <a href="#projects">Home</a>
+        <a href="#projects">Blog</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="carousel">
+        <div class="carousel-inner" id="carousel-inner">
+            <div class="carousel-item">
+                <div class="carousel-content">
+                    <h2>Skills</h2>
+                    <p>Proficient in HTML, CSS, JavaScript, and modern frameworks like React and Angular.</p>
+                    <a href="#contact">Hire Me</a>
+                </div>
+                <img src="images/picyure1.jpeg" alt="Skills Image 1">
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-content">
+                    <h2>Skills</h2>
+                    <p>Experienced in backend development with Node.js, Express, and database management.</p>
+                    <a href="#contact">Hire Me</a>
+                </div>
+                <img src="images/picture.jpeg" alt="Skills Image 2">
+            </div>
+            <div class="carousel-item">
+                <div class="carousel-content">
+                    <h2>Skills</h2>
+                    <p>Skilled in designing responsive and user-friendly interfaces with modern design tools.</p>
+                    <a href="#contact">Hire Me</a>
+                </div>
+                <img src="images/picture2.jpeg" alt="Skills Image 3">
+            </div>
+        </div>
+        <div class="carousel-buttons">
+            <button class="carousel-button" id="prev">&#10094;</button>
+            <button class="carousel-button" id="next">&#10095;</button>
+        </div>
+    </div>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Welcome to my portfolio website! I'm Rohit Limboo, a passionate web developer with a knack for creating beautiful and functional websites.</p>
+        <p>I specialize in HTML, CSS, JavaScript, and various web development frameworks.</p>
+        <img src="https://via.placeholder.com/600x400" alt="Rohit Limboo" style="width: 100%; max-width: 600px; border-radius: 10px; margin-top: 20px;">
+    </section>
+
+    <section id="projects">
+        <h2>Projects</h2>
+        <p>Here are some of my notable projects:</p>
+        <div class="project-gallery">
+            <div class="project-item">
+                <img src="https://via.placeholder.com/300x200" alt="Project 1">
+                <p>Project 1 - Description of project 1</p>
+            </div>
+            <div class="project-item">
+                <img src="https://via.placeholder.com/300x200" alt="Project 2">
+                <p>Project 2 - Description of project 2</p>
+            </div>
+            <div class="project-item">
+                <img src="https://via.placeholder.com/300x200" alt="Project 3">
+                <p>Project 3 - Description of project 3</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>Feel free to get in touch with me:</p>
+        <ul>
+            <li>Email: rohitlimboo@example.com</li>
+            <li>Phone: +918927450552</li>
+            <li>LinkedIn: <a href="https://www.linkedin.com/in/rohitlimboo">Rohit Limboo</a></li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Rohit limboo - Portfolio</p>
+    </footer>
+
+    <!-- The Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2>Login/Register</h2>
+            </div>
+            <div class="modal-body">
+                <form id="authForm">
+                    <input type="email" placeholder="Email" required>
+                    <input type="password" placeholder="Password" required>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="switchToRegister">Switch to Register</button>
+                <button id="switchToLogin" style="display: none;">Switch to Login</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const carouselInner = document.getElementById('carousel-inner');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
+        let index = 0;
+        const totalItems = document.querySelectorAll('.carousel-item').length;
+
+        prevButton.addEventListener('click', () => {
+            if (index > 0) {
+                index--;
+            } else {
+                index = totalItems - 1;
+            }
+            carouselInner.style.transform = `translateX(-${index * 100}%)`;
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (index < totalItems - 1) {
+                index++;
+            } else {
+                index = 0;
+            }
+            carouselInner.style.transform = `translateX(-${index * 100}%)`;
+        });
+
+        const autoSlide = () => {
+            if (index < totalItems - 1) {
+                index++;
+            } else {
+                index = 0;
+            }
+            carouselInner.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        setInterval(autoSlide, 4000);
+
+        const authButton = document.getElementById('authButton');
+        const authModal = document.getElementById('authModal');
+        const closeModal = document.getElementsByClassName('close')[0];
+        const switchToRegister = document.getElementById('switchToRegister');
+        const switchToLogin = document.getElementById('switchToLogin');
+        const authForm = document.getElementById('authForm');
+
+        authButton.onclick = function () {
+            authModal.style.display = 'block';
+        }
+
+        closeModal.onclick = function () {
+            authModal.style.display = 'none';
+        }
+
+        window.onclick = function (event) {
+            if (event.target == authModal) {
+                authModal.style.display = 'none';
+            }
+        }
+
+        switchToRegister.onclick = function () {
+            switchToRegister.style.display = 'none';
+            switchToLogin.style.display = 'inline';
+            authForm.innerHTML = `
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Register</button>
+            `;
+        }
+
+        switchToLogin.onclick = function () {
+            switchToLogin.style.display = 'none';
+            switchToRegister.style.display = 'inline';
+            authForm.innerHTML = `
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit">Login</button>
+            `;
+        }
+    </script>
+
+</body>
+
+</html>
